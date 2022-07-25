@@ -3,12 +3,13 @@ env: # Environment variables to pass to all tasks
     CIRRUS_WORKING_DIR: "/tmp/ci" # Where to clone the aosp-builder repo
 
 # store our secrets here
-    github_token: "ENCRYPTED[b9455bd3688144a717e82c52d90608feb44db92bd1ad6675072685da57663b03f537e1f798e4dec1a1f46d0bea9064a3]"
-    bot_api: "ENCRYPTED[203cc642df3a41c42a5477fa3569a9a45b8bd4a5720dfa717e29d5e01127dc69799c5a2c74270c0f9c8d1109c4143222]"
-    chat_id: "ENCRYPTED[73b4d3a4d0f6c12ba795457d76601753486b73b24a4094a0ddc6276567b1623dccd9d391e559c70f861c7c60a09af9ed]"
-
-# store information about git here
-    gmail: ehteshammalik18998@gmail.com
+    github_token: "ENCRYPTED[26e12e24e712ebe3eabe9d1aed477950f9c36ea617a3200763bf97b36c670e4379c895ab48db6dc4064774e852f86bca]"
+    bot_api: "ENCRYPTED[dcc9f4b21f8ef768d864425ef374687e3411ace5dc2b0534465365266e1350d7678eb8a9b989769a9dd6fa37fcf49672]"
+    chat_id: "ENCRYPTED[d911f5ca04b623c0dc19a65fa35c9c06b299ba509bd72cab395ec9c0c5468146454637011a633079ea87a3cd1d955215]"
+    drive_conf: "ENCRYPTED[e33b605b36ce70a5001d3cd4d03164537b1de995530f41af45e15a8dbb8a91b4eeab572ea00e4a1f160c36a1fa12d716]"
+    ghost: "ENCRYPTED[ad932bb43b162e65269d3dc350be75bc8fdc56f949ebc39a3dee1723e5db875a1e3bc05d1d7614b36beb9fb5576a497b]"
+    gh_username: "ENCRYPTED[3ae505953dc6b63a9e9e432ec0714b2ef6cae0c704202b07b026a358956feb87363c2f0610830968353898325c9301a7]"
+    gh_mail: "ENCRYPTED[ad4ebe50d8fc04b63ddb62afb80bfe08557b5c33fc7dc5014675e6b8e92a0e029a41e56cf981e2d48570e1edce1b176c]"
 
 task:
     name: aosp

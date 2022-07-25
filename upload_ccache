@@ -11,10 +11,10 @@ com ccache 0
 
 echo "• Uploading Cache On Gdrive •"
 upload_ccache ccache.tar.gz
-tg "$rom_name ccache was uploaded successfully!
-Total Size: $(ls -sh ${PWD}/ccache.tar.gz | cut -d - -f 1 | cut -d / -f 1)
-Time Took: $(($SECONDS / 60)) minute(s) and $(($SECONDS % 60)) second(s).
-Status: $progress"
+tg "*$rom_name Ccache was Uploaded Successfully!*
+*Size:* \`$(ls -sh ${PWD}/ccache.tar.gz | cut -d - -f 1 | cut -d / -f 1)\`
+*Upload Time:* \`$(($SECONDS / 60)) minute(s) and $(($SECONDS % 60)) second(s).\`
+*Cirrus Task:* [Here]($progress)"
 
 rom_zip=`ls /tmp/rom/out/target/product/*/*.zip`
 if [ -z $rom_zip ]; then
@@ -25,9 +25,9 @@ build_type="`cat /tmp/build_type.txt`"
 # lets compile again as rom isn't ready yet
 git clone -b $CIRRUS_BRANCH $github_repo $rom_name && cd $rom_name
 if [ -e "/tmp/rom/build.log" ] && [ $(tail -n 50 /tmp/rom/build.log | grep -o -e ' 99% ' -e ' 98% ' -e ' 97% ' -e ' 96% ' -e ' 95% ' -e ' 94% ' -e ' 93% ' -e ' 92% ' -e ' 91% ' -e ' 90% ' | head -n 1) ]; then
-git commit -sm "SH*T, HERE WE GO AGAIN | R" --allow-empty
+git commit -sm "Aaa shit, here we go again | R" --allow-empty
 else
-git commit -sm "SH*T, HERE WE GO AGAIN | $build_type" --allow-empty
+git commit -sm "Aaa shit, here we go again | $build_type" --allow-empty
 fi
 git push -f
 
@@ -36,14 +36,15 @@ else
 # drop empty commits
 git clone -b $CIRRUS_BRANCH $github_repo $rom_name && cd $rom_name
 git filter-branch --commit-filter 'git_commit_non_empty_tree "$@"' -f HEAD
-git commit -sm "ci: $rom_name compiled successfully [skip ci]" -m "* now you can have successfull build on just one commit
-* make sure to put R letter at the end of commit messages
-* lik git commit -m your_msg R" --allow-empty
+git commit -sm "ci: $rom_name compiled successfully [skip ci]" \
+	-m "- Now you can have successfull build on just one commit
+- Make sure to put R letter at the end of commit messages
+- Like git commit -m your_msg R" --allow-empty
 git push -f
 
 fi
 
-echo "dont upload cache again" > /tmp/abort.txt
+echo "Dont upload cache again" > /tmp/abort.txt
 
 fi
 

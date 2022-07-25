@@ -7,20 +7,15 @@ cd /tmp/rom
 SECONDS=0
 
 # Sync source
-repo init --depth=1 --no-repo-verify -u https://github.com/ArrowOS/android_manifest -b arrow-12.1 -g default,-mips,-darwin,-notdefault
-git clone https://github.com/wHo-EM-i/manifest.git --depth 1 -b arrow-4.19 .repo/local_manifests
+repo init --depth=1 --no-repo-verify -u https://github.com/Project-Elixir/official_manifest -b snow -g default,-mips,-darwin,-notdefault
+git clone https://github.com/$ghost/local_manifest_vince.git --depth 1 -b elixir-12 .repo/local_manifests
 
 # Sync source without unnecessary messages, try with -j30 first, if fails, it will try again
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all) || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all)
 
-# local manifest
-#git clone --depth=1 https://github.com/$CIRRUS_REPO_OWNER/device_xiaomi_lavender -b hmp device/xiaomi/lavender
-#git clone --depth=1 https://github.com/$CIRRUS_REPO_OWNER/vendor_xiaomi_lavender -b hmp vendor/xiaomi/lavender
-#git clone --depth=1 https://$CIRRUS_REPO_OWNER:$github_token@github.com/$CIRRUS_REPO_OWNER/kernel_xiaomi_lavender -b eas kernel/xiaomi/lavender
-
-tg "$rom_name source sync completed!
-Total Size: $(du -sh /tmp/rom | cut -d - -f 1 | cut -d / -f 1)
-Time Took: $(($SECONDS / 60)) minute(s) and $(($SECONDS % 60)) second(s).
-Status: $progress"
+tg "*$rom_name Source Sync Completed!*
+*Size:* \`$(du -sh /tmp/rom | cut -d - -f 1 | cut -d / -f 1)\`
+*Sync Time:* \`$(($SECONDS / 60)) minute(s) and $(($SECONDS % 60)) second(s).\`
+*Cirrus Task:* [Here]($progress)"
 
 echo "$(($SECONDS / 60))" > /tmp/sync_time.txt

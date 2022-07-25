@@ -2,7 +2,7 @@
 
 # Normal build steps
 . build/envsetup.sh
-lunch arrow_lavender-userdebug
+lunch aosp_vince-userdebug
 . extras.sh
 export TZ=Asia/Kolkata
-make bacon -j$(nproc --all)
+mka bacon -j$(nproc --all)
