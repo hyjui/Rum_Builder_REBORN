@@ -7,7 +7,6 @@
 
 export TZ=Asia/Kolkata
 export SELINUX_IGNORE_NEVERALLOWS=true
-export ARROW_GAPPS=true
 case "$build_type" in
 		 R|r)
 		 export _JAVA_OPTIONS="-Xmx10g"

@@ -10,28 +10,29 @@ install_apt
 check_build_type
 case "$build_type" in
 		 V)
-		 tg "Build Started! | Type : $build_type
-Rom: $rom_name
-Branch: $branch_name
-Device: $device_codename
-Status: $progress"
+		 tg "*$rom_name Build Triggered!*
+*Build Type:* \`$build_type\`
+*Device:* \`$device_codename\`
+*Cirrus Task:* [Here]($progress)"
 		 ;; # else
 		 *)
-		 tg "Started New Build as $rom_name isn't Compiled yet..!
-Type : $build_type | Status: $progress"
+		 tg "*$rom_name Triggered New Build*
+*Reason:* \`$rom_name is not compiled yet..!\`
+*Build Type:* \`$build_type\`
+*Cirrus Task:* [Here]($progress)"
 esac
 
 cd /tmp # Where to download cccahe
 
 echo "• Downloading CCACHE •"
-down https://emy.ehteshammalik4.workers.dev/$device_codename/$rom_name/$branch_name/ccache.tar.gz || down https://emy.ehteshammalik4.workers.dev/$device_codename/$rom_name/$branch_name/ccache.tar.gz
+down https://worst-generation.prajwals.workers.dev/4:/$device_codename/$rom_name/ccache.tar.gz || down https://worst-generation.prajwals.workers.dev/4:/$device_codename/$rom_name/ccache.tar.gz
 if [ -e *.tar.gz ]; then
-tg "$rom_name ccache downloaded successfully!
-Total Size: $(ls -sh ${PWD}/ccache.tar.gz | cut -d - -f 1 | cut -d / -f 1)
-Time Took: $(($SECONDS / 60)) minute(s) and $(($SECONDS % 60)) second(s).
-Status: $progress"
+tg "*$rom_name Ccache Downloaded Successfully!*
+*Size:* \`$(ls -sh ${PWD}/ccache.tar.gz | cut -d - -f 1 | cut -d / -f 1)\`
+*Download Time:* \`$(($SECONDS / 60)) minute(s) and $(($SECONDS % 60)) second(s).\`
+*Cirrus Task:* [Here]($progress)"
 else
-tg "Skipping CCACHE Download on 1st build..!"
+tg "`Skipping CCACHE Download on 1st build..!`"
 fi
 
 # Extract ccache so ci can use it
@@ -49,7 +50,7 @@ echo "" > /etc/mtab
 # Start new build if system img compiled
 case "$build_type" in
 		 S|s)
-		 echo "• build Type is System | Started loop•"
+		 echo "• Build Type is System | Started loop•"
 		 sleep 70m # start loop after 70mins
 		 ;; # else
 		 *) # skip the script
@@ -59,8 +60,9 @@ esac
 while true; do
 if [ -e /tmp/rom/out/target/product/$device_codename/system.img ]; then
 echo "R" > /tmp/build_type.txt
-tg "System Compilation completed! Starting Cache upload
-Status: $progress"
+tg "*System Compilation completed!*
+\`Starting Cache upload..\`
+*Cirrus Task:* [Here]($progress)"
 bash /tmp/ci/upload_ccache
 else
 sleep 2m

@@ -39,9 +39,9 @@ case "$build_type" in
 		 kill %1
 		 ;;
 		 R|r) # Lets Make Full Rom
-		 bash /tmp/ci/build.sh; ls out/target/product/$device_codename/*2022*.zip || bash /tmp/ci/build.sh
-		 if [ ! -e out/target/product/*/*2022*.zip ]; then # to bypass OOM kill
-		 bash /tmp/ci/build.sh; ls out/target/product/$device_codename/*2022*.zip || bash /tmp/ci/build.sh # simply re-run the build
+		 bash /tmp/ci/build.sh; ls out/target/product/$device_codename/*$device_codename*.zip || bash /tmp/ci/build.sh
+		 if [ ! -e out/target/product/*/*$device_codename*.zip ]; then # to bypass OOM kill
+		 bash /tmp/ci/build.sh; ls out/target/product/$device_codename/*$device_codename*.zip || bash /tmp/ci/build.sh # simply re-run the build
 		 fi
 esac
 
@@ -52,14 +52,13 @@ echo "S" > /tmp/build_type.txt
 fi
 
 cd out/target/product/$device_codename/
-ls *2022*zip && upload *2022*zip
+ls *$device_codename*.zip && upload *$device_codename*.zip
 
-if [ ! -e /tmp/rom/out/target/product/*/*2022*.zip ]; then
+if [ ! -e /tmp/rom/out/target/product/*/*$device_codename*.zip ]; then
 
 # don't send this again if bg loop already done this when it was stuck in sleep
 if [ ! -e /tmp/abort.txt ]; then
-tg "Stop Compiling $build_type To Collect Cache
-Status: $progress"
+tg "\`Stopping Compilation! $build_type to collect ccache..\`"
 fi
 
 fi
