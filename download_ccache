@@ -25,7 +25,7 @@ esac
 cd /tmp # Where to download cccahe
 
 echo "• Downloading CCACHE •"
-down https://worst-generation.prajwals.workers.dev/4:/$device_codename/$rom_name/ccache.tar.gz || down https://worst-generation.prajwals.workers.dev/4:/$device_codename/$rom_name/ccache.tar.gz
+down https://worst-generation.prajwals.workers.dev/4:/ccache/$device_codename/$rom_name/ccache.tar.gz || down https://worst-generation.prajwals.workers.dev/4:/ccache/$device_codename/$rom_name/ccache.tar.gz
 if [ -e *.tar.gz ]; then
 tg "*$rom_name Ccache Downloaded Successfully!*
 *Size:* \`$(ls -sh ${PWD}/ccache.tar.gz | cut -d - -f 1 | cut -d / -f 1)\`
